@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}CollegeWiki{% endblock %}
+{% block css%}index.css{% endblock %}
+
+{% block content %}
+<div class="top">
+    <h1>CollegeWiki</h1>
+
+    <div class="topContent">
+        {% if current_user.is_authenticated %}
+        Hi {{ current_user.username }}!
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Log out</a>
+        {% else %}
+        <a href="/signup">Sign up</a>
+        <a href="/login">Log in</a>
+        {% endif %}
+    </div>
+
+</div>
+
+<p>CollegeWiki is a community of students helping eachother apply to college.</p>
+<p>It’s where we share our favorite resources and important data.</p>
+
+<input type="text" id="searchbar" placeholder="Find your college">
+<!-- {% for school in schools: %}
+    <a href="{{ school.url }}">{{ school.name }}</a><br>
+    {% endfor %} -->
+<ul id="collegesList"></ul>
+
+<script>
+    const collegesList = document.querySelector("#collegesList")
+
+    const searchBar = document.querySelector("#searchbar")
+
+
+
+    let colleges = []
+
+    fetch('static/js/data.json', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            }
+        })
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (data) {
+            colleges = data
+        }).catch(function (err) {
+            console.warn('Something went wrong.', err)
+        })
+
+
+
+    searchBar.addEventListener('keyup', (e) => {
+        const searchString = e.target.value.toLowerCase()
+        if (searchString != '') {
+            const filteredColleges = colleges.filter(element => {
+                return (
+                    element.name.toLowerCase().includes(searchString) ||
+                    element.location.toLowerCase().includes(searchString)
+                )
+            })
+            collegesList.style.display = 'block'
+            displaycolleges(filteredColleges)
+        } else {
+            collegesList.style.display = 'None'
+        }
+    })
+
+
+
+
+
+
+
+
+    const displaycolleges = (colleges) => {
+        const htmlString = colleges.map((college) => {
+
+                return `
+            <li>
+                <a class="collegeLink" href='${college.url}'>${college.name}</a>
+            </li>
+        `;
+            })
+            .join('');
+        collegesList.innerHTML = htmlString;
+    };
+</script>
+{% endblock %}

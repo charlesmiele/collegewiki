@@ -1,0 +1,23 @@
+:root {
+    --main-font: 'Inter', sans-serif;
+    --title-font: 'Playfair Display', serif;
+
+}
+
+html {
+    display: flex;
+    justify-content: center;
+}
+body {
+    font-family: var(--main-font);
+    font-weight: 300;
+    max-width: 1350px;
+    flex-grow: 1;
+    padding-top: 10px;
+}
+
+h1 {
+    font-family: var(--title-font);
+    font-weight: 400;
+    font-size: 48px;
+}

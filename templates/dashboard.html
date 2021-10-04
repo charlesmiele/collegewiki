@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block css %}dashboard.css{% endblock %}
+
+{% block content %}
+<h1>Hello @{{ current_user.username }}. This is your dashboard</h1>
+<p>Your email is: {{ current_user.email }}</p>
+<p>Your username is: {{ current_user.username }}</p>
+
+<h2>Uploaded anectodes</h2>
+{% if uploads!= None %}
+{% for upload in uploads: %}
+<a href="{{ upload.url }}">{{ upload.url }}</a>
+<p>{{ upload.upvote_count }} upvotes</p>
+{% endfor %}
+{% endif %}
+
+
+<h2>Upvoted anectodes</h2>
+{% if upvotes != None %}
+{% for upvote in upvotes: %}
+<a href="{{ links[upvote.post_id] }}">{{ links[upvote.post_id] }}</a>
+<p>You upvoted on  {{ upvote.date.month }}/{{ upvote.date.day }}</p>
+{% endfor %}
+{% endif %}
+
+<h2>Uploaded data</h2>
+{% if dataz != None%}
+{% for data in dataz %}
+<a href="../{{ data.school }}">{{ data.school }}</a>
+{% endfor %}
+{% endif %}
+
+
+<h2>Uploaded hierarchies</h2>
+{% if hierarchies != None %}
+{% for hierarchy in hierarchies %}
+<a href="../{{ hierarchy.school }}">{{ hierarchy.school }}</a>
+{% endfor %}
+{% endif %}
+
+<h2>Uploaded financial aid</h2>
+
+{% endblock %}

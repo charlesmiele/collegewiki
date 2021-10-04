@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Submit a change to the hierarchy{% endblock%}
+{% block extra_path %}../{% endblock %}
+{% block extra_path_2 %}../{% endblock %}
+{% block css %}forms.css{% endblock %}
+
+{% block content %}
+    <form action="#" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.rigor.label }}
+        {{ form.rigor }}
+        {{ form.rank.label }}
+        {{ form.rank }}
+        {{ form.gpa.label }}
+        {{ form.gpa }}
+        {{ form.test_scores.label }}
+        {{ form.test_scores }}
+        {{ form.essay.label }}
+        {{ form.essay }}
+        {{ form.recommendations.label }}
+        {{ form.recommendations }}
+        {{ form.interview.label }}
+        {{ form.interview }}
+        {{ form.extracurriculars.label }}
+        {{ form.extracurriculars }}
+        {{ form.talent.label }}
+        {{ form.talent }}
+        {{ form.character.label }}
+        {{ form.character }}
+        {{ form.first_generation.label }}
+        {{ form.first_generation }}
+        {{ form.alumni.label }}
+        {{ form.alumni }}
+        {{ form.geographical.label }}
+        {{ form.geographical }}
+        {{ form.state_residency.label }}
+        {{ form.state_residency }}
+        {{ form.religion.label }}
+        {{ form.religion }}
+        {{ form.race.label }}
+        {{ form.race }}
+        {{ form.volunteer.label }}
+        {{ form.volunteer }}
+        {{ form.work_experience.label }}
+        {{ form.work_experience }}
+        {{ form.interest_level.label }}
+        {{ form.interest_level }}
+        {{ form.source.label }}
+        {{ form.source }}
+
+        {% for field, errors in form.errors.items() %}
+            <small>
+                {{ ', '.join(errors) }}
+            </small>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+.schoolName {
+    text-decoration: underline;
+}
+
+button {
+    background-color: none;
+    text-emphasis: stroke;
+    border: none;
+  }
+
+
+
+.tOC > * {
+    padding-left: 10px;
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.tOC > *:hover {
+    text-decoration: underline;
+}
+
+
+
+.content {
+    width: 90%;
+    margin: auto;
+}
+
+.content table {
+    margin: auto;
+    min-width: 400px;
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+    outline: 1px solid black;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contentVideo {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.video {
+    display: flex;
+}
+
+iframe {
+    border: 1px solid black;
+    border-radius: 5px;
+}

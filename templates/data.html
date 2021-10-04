@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Submit a change to the admissions data{% endblock %}
+{% block extra_path %}../{% endblock %}
+{% block extra_path_2 %}../{% endblock %}
+{% block css %}forms.css{% endblock %}
+
+{% block content %}
+<form action="#" method="post">
+{{ form.hidden_tag() }}
+{{ form.section.label }}
+{{ form.section }}
+{{ form.change.label }}
+{{ form.change }}
+{{ form.source.label }}
+{{ form.source }}
+
+{% for field, errors in form.errors.items() %}
+            <small>
+                {{ ', '.join(errors) }}
+            </small>
+{% endfor %}
+<button type="submit">Submit</button>
+</form>
+
+{% endblock %}

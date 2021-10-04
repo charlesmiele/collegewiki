@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% block title %}{{ school.name }}{% endblock %}
+{% block extra_path %}../{% endblock %}
+{% block css%}school.css{% endblock %}
+
+
+{% block content %}
+<h1 class="schoolName">{{ school.name }}</h1>
+<p>TABLE OF CONTENTS</p>
+<div class="tOC">
+    <a href="#stats">Admissions stats</a>
+    <a href="#hierarchy">Admissions hierarchy</a>
+    <a href="#aid">Financial aid</a>
+    <a href="#anectodes">Anectodes</a>
+</div>
+
+
+
+<div class="section">
+    <div class="header">
+        <p id="stats">ADMISSIONS STATISTICS</p>
+        <a href="data"><img src="../static/images/edit_black_24dp.svg" alt="Edit/add"></a>
+    </div>
+    <div class="content">
+        {% if admissions_stats.count() > 0 %}
+        <table>
+            {% for stat in admissions_stats: %}
+            <tr>
+                <td>{{ stat.section }}</td>
+                <td><a href="{{stat.source}}" target="_blank">{{ stat.data }}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="section">
+    <div class="header">
+        <p id="hierarchy">ADMISSIONS HIERARCHY</p>
+        <a href="hierarchy"><img src="../static/images/edit_black_24dp.svg" alt="Edit/add"></a>
+    </div>
+    <div class="content">
+        {% if hierarchy != None: %}
+        <table>
+            <tr>
+                <td>Rigor of secondary school record</td>
+                <td>{{ translations[hierarchy.rigor] }}</td>
+            </tr>
+            <tr>
+                <td>Class rank</td>
+                <td>{{ translations[hierarchy.rank] }}</td>
+            </tr>
+            <tr>
+                <td>Academic GPA</td>
+                <td>{{ translations[hierarchy.gpa] }}</td>
+            </tr>
+            <tr>
+                <td>Standardized test scores</td>
+                <td>{{ translations[hierarchy.test_scores] }}</td>
+            </tr>
+            <tr>
+                <td>Application essay</td>
+                <td>{{ translations[hierarchy.essay] }}</td>
+            </tr>
+            <tr>
+                <td>Recommendation(s)</td>
+                <td>{{ translations[hierarchy.recommendations] }}</td>
+            </tr>
+            <tr>
+                <td>Interview</td>
+                <td>{{ translations[hierarchy.interview] }}</td>
+            </tr>
+            <tr>
+                <td>Extracurriculars</td>
+                <td>{{ translations[hierarchy.extracurriculars] }}</td>
+            </tr>
+            <tr>
+                <td>Talent/ability</td>
+                <td>{{ translations[hierarchy.talent] }}</td>
+            </tr>
+            <tr>
+                <td>Character/personal qualities</td>
+                <td>{{ translations[hierarchy.character] }}</td>
+            </tr>
+            <tr>
+                <td>First generation</td>
+                <td>{{ translations[hierarchy.first_generation] }}</td>
+            </tr>
+            <tr>
+                <td>Alumni/ae relation</td>
+                <td>{{ translations[hierarchy.alumni] }}</td>
+            </tr>
+            <tr>
+                <td>Geographical residence</td>
+                <td>{{ translations[hierarchy.geographical] }}</td>
+            </tr>
+            <tr>
+                <td>State residency</td>
+                <td>{{ translations[hierarchy.state_residency] }}</td>
+            </tr>
+            <tr>
+                <td>Religious affiliation/committment</td>
+                <td>{{ translations[hierarchy.religion] }}</td>
+            </tr>
+            <tr>
+                <td>Racial/ethnic status</td>
+                <td>{{ translations[hierarchy.race] }}</td>
+            </tr>
+            <tr>
+                <td>Volunteer work</td>
+                <td>{{ translations[hierarchy.volunteer] }}</td>
+            </tr>
+            <tr>
+                <td>Work experience</td>
+                <td>{{ translations[hierarchy.work_experience] }}</td>
+            </tr>
+            <tr>
+                <td>Level of applicant's interest</td>
+                <td>{{ translations[hierarchy.interest_level] }}</td>
+            </tr>
+
+        </table>
+        <a href="{{ hierarchy.source }}" target="_blank" rel="noopener noreferrer">Source</a>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="section">
+    <div class="header">
+        <p id="aid">FINANCIAL AID</p>
+        <a href="aid"><img src="../static/images/edit_black_24dp.svg" alt="Edit/add"></a>
+    </div>
+    <div class="content">
+        {% if fin_stats.count() > 0 %}
+        <table>
+            {% for stat in fin_stats: %}
+            <tr>
+                <td>{{ stat.section }}</td>
+                <td><a href="{{stat.source}}" target="_blank">{{ stat.data }}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}</div>
+</div>
+
+
+
+<div class="section">
+    <div class="header">
+        <p id="anectodes">ANECTODES</p>
+        <a href="anectodes" style="color: black; text-decoration: none"><strong style="font-size: 36px;">+</strong></a>
+    </div>
+    <div class="contentVideo">
+        {% for post in posts %}
+        <div class="video">
+            {% if post.url[0:17] == 'https://youtu.be/' %}
+            <iframe width="384" height="216" src="https://www.youtube.com/embed/{{ post.url[17::] }}"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            {% elif post.url[0:32] == 'https://www.youtube.com/watch?v=' %}
+            <iframe width="384" height="216" src="https://www.youtube.com/embed/{{ post.url[32::] }}"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+
+            {% endif %}
+
+            <div class="voteContent">
+                <p>UPVOTES: {{ (post.upvote_count) | int }}</p>
+                {% if post.id in upvotes_id %}
+                    <button>
+                        <i class="material-icons" style="color: green;">arrow_upward</i>
+                    </button>
+                    <input type="checkbox" name="upvote" id="{{ post.id }}" checked="True" style="display: none;">
+
+                {% else %}
+                    <button>
+                        <i class="material-icons" style="color: black;">arrow_upward</i>
+                    </button>
+                    <input type="checkbox" name="upvote" id="{{ post.id }}" style="display: none;">
+
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+
+    </div>
+</div>
+
+
+{% if current_user.is_authenticated %}
+<script>
+    document.querySelectorAll('button').forEach(item => {
+        item.addEventListener('click', event=> {
+            const input = item.nextElementSibling
+
+
+            if (input.checked == true) {
+                input.checked = false
+                item.firstElementChild.style.color = 'black'
+            }
+            else {
+                input.checked = true
+                item.firstElementChild.style.color = 'green'
+            }
+
+
+
+
+        var data = '{{ current_user.email }}';
+
+        var upvote_id = input.getAttribute('id');
+        console.log(upvote_id)
+
+        var new_upvote = {
+            user: data,
+            post_id: upvote_id,
+            school: '{{ school.url }}',
+            checked: input.checked,
+        }
+
+
+        fetch(window.origin+'/upvote/', {
+                method: "POST",
+                credentials: "include",
+                body: JSON.stringify(new_upvote),
+                cache: 'no-cache',
+                headers: new Headers({
+                    "content-type": "application/json"
+                })})
+            .then(function (response) {
+                if (response.status !== 200) {
+                    console.log(
+                        `Looks like there was a problem. Status code: ${response.status}`);
+                    return
+                }
+                response.json().then(function (data) {
+                        console.log(data);
+                    })
+                    .catch(function (error) {
+                        console.log("Fetch error: " + error);
+                    })
+            })
+        })
+    })
+</script>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,46 @@
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top h1 {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.topContent > * {
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+
+.topContent > *:hover {
+    text-decoration: underline;
+}
+
+input {
+    width: 40%;
+    height: 50px;
+    padding-left: 10px;
+}
+
+input::placeholder {
+    font-weight:300;
+    color: black;
+}
+
+#collegesList {
+    list-style-type: none;
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+
+.collegeLink {
+    color: black;
+    text-decoration: none;
+}
+
+.collegeLink:hover {
+    text-decoration: underline;
+}
