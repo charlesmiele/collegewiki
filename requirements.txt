@@ -7,11 +7,12 @@ Flask_WTF==0.15.1
 Flask_SQLAlchemy==2.5.1
 blinker==1.4
 brotli==1.0.9
+cdecimal
 contextvars==2.4
 cryptography==35.0.0
 cx_Oracle==8.2.1
 Cython==0.29.24
-dataclasses==0.8
+dataclasses
 docutils==0.17.1
 gevent==21.8.0
 importlib_metadata==4.8.1
